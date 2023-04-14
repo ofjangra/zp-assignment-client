@@ -1,0 +1,16 @@
+:root{
+  --text-blue:#0b3558;
+  --fields-blue:#003fb9;
+  --dark-gray:#728391;
+  --light-gray:#EFEFEF;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url("./assets/fonts/Open_Sans/openSans.ttf");
+}
