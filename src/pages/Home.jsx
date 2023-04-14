@@ -10,6 +10,9 @@ const Login = () =>{
 
     return (
         <>
+        {
+            !authState.authenticated ? <Navigate to = "/login"/> :
+        
             <section className="login_main">
 
                 <div className="login">
@@ -41,7 +44,7 @@ const Login = () =>{
                         </div>
                 </footer>
             </section>
-           
+        }
         </>
     )
 }

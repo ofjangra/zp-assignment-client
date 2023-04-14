@@ -10,6 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Navigate } from 'react-router-dom';
 
 
 const Login = () =>{
@@ -38,6 +39,7 @@ const Login = () =>{
 
     return (
         <>
+        { authState.authenticated ? 
             <section className="login_main">
 
                 <div className="login">
@@ -141,6 +143,8 @@ const Login = () =>{
                         </div>
                 </footer>
             </section>
+            : <Navigate to = "/"/>
+              }
            
         </>
     )
