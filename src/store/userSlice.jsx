@@ -13,7 +13,7 @@ const login = createAsyncThunk(
         })
 
         const jsonResponse = await response.json()
-        console.log(jsonResponse)
+   
         return jsonResponse
     }
 )
@@ -21,7 +21,7 @@ const login = createAsyncThunk(
 const getProfile = createAsyncThunk(
     'getProfile',
     async () =>{
-        console.log('i am called')
+       
         const response = await fetch("/api",
         {
             method:"GET",
@@ -31,7 +31,7 @@ const getProfile = createAsyncThunk(
             credentials:"include",
         })
         let responseJson = await response.json()
-        console.log(responseJson)
+     
         return responseJson
     }
 )
@@ -65,37 +65,61 @@ const userSlice = createSlice({
     },
     extraReducers:(builder) =>{
         builder.addCase(login.fulfilled, (state, action) =>{
-            state.user = action.payload.user
-            state.auth = {
-                authenticated:true,
-                error:"",
-                loading:false,
-            },
-            state.snack = {
-                open: true,
-                severity: "success",
-                message: action.payload.message
+            if (action.payload.success) {
+                state.user = action.payload.user
+                state.auth = {
+                    authenticated:true,
+                    error:"",
+                    loading:false,
+                },
+                state.snack = {
+                    open: true,
+                    severity: "success",
+                    message: action.payload.message
+                }
+            } else{
+                state.auth = {
+                    authenticated:false,
+                    error:"Invalid credentials",
+                    loading:false,
+                },
+                state.snack = {
+                    open: true,
+                    severity: "error",
+                    message: "Invalid credentials"
+                }
             }
+           
         }),
         builder.addCase(login.rejected, (state, action) =>{
             state.auth = {
                 authenticated:false,
-                error:"Something went wrong",
+                error:"Invalid credentials 01",
                 loading:false,
             },
             state.snack = {
                 open: true,
                 severity: "error",
-                message: "Something went wrong"
+                message: "Invlid credentials 1"
             }
         }),
         builder.addCase(getProfile.fulfilled, (state, action) =>{
-            state.user = action.payload.user
-            state.auth = {
-                authenticated:true,
-                error:"",
-                loading:false,
+            if (action.payload.success) {
+                state.user = action.payload.user
+                state.auth = {
+                    authenticated:true,
+                    error:"",
+                    loading:false,
+                }
             }
+            else{
+                state.auth = {
+                    authenticated:false,
+                    error:"",
+                    loading:false,
+                }
+            }
+           
         }),
         builder.addCase(getProfile.rejected, (state, action) =>{
             state.auth = {

@@ -29,7 +29,7 @@ const Login = () =>{
             password:Yup.string().required('Password is required')
         }),
         onSubmit:(values) =>{
-            console.log(values)
+           
             dispatch(handleAuthLoading(true))
             dispatch(login(values))
         }
@@ -39,7 +39,7 @@ const Login = () =>{
 
     return (
         <>
-        { authState.authenticated ? 
+        { !authState.authenticated ? 
             <section className="login_main">
 
                 <div className="login">
